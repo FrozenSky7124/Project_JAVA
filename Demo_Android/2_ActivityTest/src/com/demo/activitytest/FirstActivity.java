@@ -2,6 +2,7 @@ package com.demo.activitytest;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.*;
 import android.view.Window;
 import android.widget.Button;
@@ -38,7 +39,8 @@ public class FirstActivity extends Activity {
 				intent.addCategory("com.demo.activitytest.MY_CATEGORY");
 				String data = "Hello SecondActivity!";
 				intent.putExtra("extra_data", data);
-				startActivity(intent);
+				// startActivity(intent);
+				startActivityForResult(intent, 1);
 			}
 		});
 		
@@ -72,5 +74,18 @@ public class FirstActivity extends Activity {
 		default:
 		}
 		return true;
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+		case 1:
+			if (resultCode == RESULT_OK) {
+				String returnedData = data.getStringExtra("data_return");
+				Log.d("FirstActivity", returnedData);
+			}
+			break;
+		default:
+		}
 	}
 }

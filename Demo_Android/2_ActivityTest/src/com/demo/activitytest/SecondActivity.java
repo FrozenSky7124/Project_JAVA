@@ -25,10 +25,25 @@ public class SecondActivity extends Activity {
 			@Override
 			public void onClick(View v)
 			{
+				/* Intent 调用拨号
 				Intent intent = new Intent(Intent.ACTION_DIAL);
 				intent.setData(Uri.parse("tel:10086"));
 				startActivity(intent);
+				*/
+				// Intent 返回数据给上层活动
+				Intent intent = new Intent();
+				intent.putExtra("data_return", "Hello From SecondActivity.");
+				setResult(RESULT_OK, intent);
+				finish();
 			}
 		});
+	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent intent = new Intent();
+		intent.putExtra("data_return", "Hello From SecondActivity.");
+		setResult(RESULT_OK, intent);
+		finish();
 	}
 }
